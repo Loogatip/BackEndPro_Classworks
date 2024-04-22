@@ -18,37 +18,30 @@ public class AppConfig {
     public ProductionChief productionChief() {
         return new ProductionChief();
     }
-
     @Bean
     public SalesChief salesChief() {
         return new SalesChief();
     }
-
     @Bean
     public MachineOperator machineOperator() {
         return new MachineOperator();
     }
-
     @Bean
     public Storekeeper storekeeper() {
         return new Storekeeper();
     }
-
     @Bean
     public Merchandiser merchandiser() {
         return new Merchandiser();
     }
-
     @Bean
     public SalesManager salesManager() {
         return new SalesManager();
     }
-
     @Bean
     public Director director() {
         return new Director();
     }
-
     @Bean
     public Secretary secretary() {
         return new Secretary();

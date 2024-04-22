@@ -1,7 +1,6 @@
 package app.staff.administration;
 
 import app.staff.specialists.Secretary;
-import app.staff.specialists.sales.SalesManager;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class Director {
