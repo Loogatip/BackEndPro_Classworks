@@ -68,7 +68,7 @@ public class CarRepositoryDB implements CarRepository {
 
         List<Car> cars = new ArrayList<>();
         try (Connection connection = getConnection()){
-            String query = "SELECT * FROM car";
+            String query = String.format("SELECT * FROM car");
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
 
