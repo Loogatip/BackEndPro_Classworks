@@ -2,7 +2,7 @@ package app.controller;
 
 import app.model.Car;
 import app.model.CarRepository;
-import app.model.CarRepositoryMap;
+import app.model.CarRepositoryDB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class CarServlet extends HttpServlet {
 
-    private CarRepository repository = new CarRepositoryMap();
+    private CarRepository repository = new CarRepositoryDB();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
