@@ -1,6 +1,9 @@
 package de.aittr.g_37_jp_shop.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import org.springframework.lang.NonNull;
 
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -15,13 +18,67 @@ public class Product {
     private Long id;
 
     @Column(name = "title")
+    @NotNull(message = "Product title cannot be null")
+    // null и пустая строка "" - это разные вещи.
+    @NotBlank(message = "Product title cannot be empty")
+
+//     например, нам нужно определенное заполнения данного поля:
+//     Banana - V
+//     banana - X
+//     Ba -X
+//     BANANA - X
+//     Banana3 - X
+//     Banana# - X
+//     Банан - X
+
+    @Pattern(
+            regexp = "[A-Z][a-z]{2,}",
+            message = "Product title should be at least 3 character length, " +
+                    "start with capital letter and may contain only latin characters"
+    )
     private String title;
 
     @Column(name = "price")
+    @NotNull(message = "Product price cannot be null")
+    @DecimalMin(
+            value = "0.01",
+            message = "Product price should be equal to or greater than 0.01"
+    )
+    @DecimalMax(
+            value = "100000.00",
+            inclusive = false,
+            message = "Product price should be lesser than 100 000.- €"
+    )
     private BigDecimal price;
 
     @Column(name = "isActive")
     private boolean isActive;
+
+    public Long getId() {
+        return id;
+    }
+    public String getTitle() {
+        return title;
+    }
+    public BigDecimal getPrice() {
+        return price;
+    }
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+    public void setActive(boolean active) {
+        isActive = active;
+    }
 
     public Product() {
     }
@@ -52,6 +109,7 @@ public class Product {
         result = 31 * result + (isActive ? 1 : 0);
         return result;
     }
+
     @Override
     public String toString(){
         return String.format("Product: ID - %d, title - %s, price - %.2f, active - %s",
